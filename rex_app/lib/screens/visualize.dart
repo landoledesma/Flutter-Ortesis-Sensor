@@ -1,17 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+
 import 'package:csv/csv.dart';
 import 'package:rex_app/screens/select_files.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
-class SensorData {
-  final double x;
-  final double y;
-
-  SensorData({required this.x, required this.y});
-}
+import '../widgets_visualize/chart_file.dart';
 
 class PantallaDatosHistoricos extends StatefulWidget {
   @override
@@ -43,27 +37,6 @@ class _PantallaDatosHistoricosState extends State<PantallaDatosHistoricos> {
     }
   }
 
-  SfCartesianChart _crearGrafico() {
-    List<SensorData> datos = [];
-
-    // Asumiendo que la columna 0 contiene el eje X y la columna 1 contiene el eje Y
-    for (var fila in _datos!) {
-      datos.add(SensorData(x: fila[0].toDouble(), y: fila[1].toDouble()));
-    }
-
-    return SfCartesianChart(
-      primaryXAxis: NumericAxis(),
-      primaryYAxis: NumericAxis(),
-      series: <ChartSeries>[
-        LineSeries<SensorData, double>(
-          dataSource: datos,
-          xValueMapper: (SensorData data, _) => data.x,
-          yValueMapper: (SensorData data, _) => data.y,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +55,7 @@ class _PantallaDatosHistoricosState extends State<PantallaDatosHistoricos> {
             child: Container(
               decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
               child: _datos != null
-                  ? _crearGrafico()
+                  ? SensorChart(datos: _datos!)
                   : Center(
                       child: Text('Gráfica de datos históricos del sensor'),
                     ),
