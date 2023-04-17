@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
+import '../widgets_conection/bluetooth_function.dart';
 import '../widgets_conection/body_conect.dart';
 
 class PantallaConexionBluetooth extends StatefulWidget {
@@ -10,28 +11,7 @@ class PantallaConexionBluetooth extends StatefulWidget {
 }
 
 class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
-  FlutterBlue flutterBlue = FlutterBlue.instance;
-  bool isSwitched = false;
-  List<ScanResult> deviceList = [];
-
-  void _toggleBluetooth(bool value) {
-    setState(() {
-      isSwitched = value;
-    });
-    if (value) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Por favor, habilite manualmente el Bluetooth'),
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Por favor, deshabilite manualmente el Bluetooth'),
-      ));
-    }
-  }
-
-  void _scanDevices() {
-    // Implementar lógica para escanear dispositivos Bluetooth
-  }
+  BluetoothFunctions bluetoothFunctions = BluetoothFunctions();
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +20,14 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
         title: Text('Conectar dispositivo'),
       ),
       body: Body(
-        isSwitched: isSwitched,
-        toggleBluetooth: _toggleBluetooth,
-        scanDevices: _scanDevices,
-        deviceList: deviceList,
+        isSwitched: bluetoothFunctions.isSwitched,
+        toggleBluetooth: (bool value) => bluetoothFunctions.toggleBluetooth(
+          context,
+          value,
+          setState,
+        ),
+        scanDevices: bluetoothFunctions.scanDevices,
+        deviceList: bluetoothFunctions.deviceList,
       ),
     );
   }

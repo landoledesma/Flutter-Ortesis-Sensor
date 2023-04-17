@@ -16,7 +16,6 @@ class SensorChart extends StatelessWidget {
   List<SensorData> _procesarDatos() {
     List<SensorData> data = [];
     for (int i = 1; i < datos.length; i++) {
-      // Comienza desde la segunda fila (índice 1)
       var fila = datos[i];
       double xValue = double.parse(fila[0].toString());
       double yValue = double.parse(fila[1].toString());
@@ -39,6 +38,12 @@ class SensorChart extends StatelessWidget {
           yValueMapper: (SensorData data, _) => data.y,
         ),
       ],
+      // Habilitar el zoom y el desplazamiento en la gráfica
+      zoomPanBehavior: ZoomPanBehavior(
+        enablePinching: true,
+        zoomMode: ZoomMode.x,
+        enablePanning: true,
+      ),
     );
   }
 }
