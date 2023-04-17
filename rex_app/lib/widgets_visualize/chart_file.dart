@@ -15,10 +15,12 @@ class SensorChart extends StatelessWidget {
 
   List<SensorData> _procesarDatos() {
     List<SensorData> data = [];
-    for (var fila in datos) {
-      data.add(SensorData(
-          x: double.parse(fila[0].toString()),
-          y: double.parse(fila[0].toString())));
+    for (int i = 1; i < datos.length; i++) {
+      // Comienza desde la segunda fila (índice 1)
+      var fila = datos[i];
+      double xValue = double.parse(fila[0].toString());
+      double yValue = double.parse(fila[1].toString());
+      data.add(SensorData(x: xValue, y: yValue));
     }
     return data;
   }
