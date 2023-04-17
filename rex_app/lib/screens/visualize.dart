@@ -1,10 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:csv/csv.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:rex_app/screens/select_files.dart';
+
+import '../widgets_visualize/csv_graph.dart';
 
 class PantallaDatosHistoricos extends StatefulWidget {
   @override
@@ -13,7 +11,6 @@ class PantallaDatosHistoricos extends StatefulWidget {
 }
 
 class _PantallaDatosHistoricosState extends State<PantallaDatosHistoricos> {
-  List<List<dynamic>>? _datos;
   String? _selectedFilePath;
 
   Future<void> _cargarArchivoCSV() async {
@@ -23,14 +20,7 @@ class _PantallaDatosHistoricosState extends State<PantallaDatosHistoricos> {
     );
 
     if (filePath != null) {
-      final input = new File(filePath).openRead();
-      final fields = await input
-          .transform(utf8.decoder)
-          .transform(new CsvToListConverter())
-          .toList();
-
       setState(() {
-        _datos = fields;
         _selectedFilePath = filePath;
       });
     }
@@ -53,11 +43,8 @@ class _PantallaDatosHistoricosState extends State<PantallaDatosHistoricos> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-              child: _datos != null
-                  ? Center(
-                      child: Text(
-                          'Gráfico en construcción'), // Reemplazar esto con el gráfico utilizando `fl_chart`
-                    )
+              child: _selectedFilePath != null
+                  ? CsvGraph(filePath: _selectedFilePath)
                   : Center(
                       child: Text('Gráfica de datos históricos del sensor'),
                     ),
