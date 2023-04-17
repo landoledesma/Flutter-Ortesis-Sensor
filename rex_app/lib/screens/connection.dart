@@ -15,7 +15,18 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
   List<ScanResult> deviceList = [];
 
   void _toggleBluetooth(bool value) {
-    // Implementar lógica para habilitar/deshabilitar Bluetooth
+    setState(() {
+      isSwitched = value;
+    });
+    if (value) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Por favor, habilite manualmente el Bluetooth'),
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Por favor, deshabilite manualmente el Bluetooth'),
+      ));
+    }
   }
 
   void _scanDevices() {
