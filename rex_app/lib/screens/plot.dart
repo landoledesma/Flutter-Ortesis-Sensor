@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar.dart';
-import '../widgets_plot/body.dart';
+import '../widgets_plot/body_plot.dart';
 
 class PantallaDatosTiempoReal extends StatefulWidget {
   @override
