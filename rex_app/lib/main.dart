@@ -1,5 +1,6 @@
 // main.dart
 import 'package:flutter/material.dart';
+import 'package:rex_app/screens/select_files.dart';
 
 import 'screens/home.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: InicioPantalla(),
+      home: SeleccionarArchivoScreen(),
     );
   }
 }
