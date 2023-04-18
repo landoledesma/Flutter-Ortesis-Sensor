@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:rex_app/widgets_conection/buttoms_conect.dart';
 
 class Body extends StatelessWidget {
