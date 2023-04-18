@@ -47,6 +47,7 @@ class Body extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 16),
+          // Muestra la lista de dispositivos usando ListTile
           ...deviceList.map((device) => ListTile(
                 title: Text(device.device.name),
                 subtitle: Text(device.device.id.toString()),

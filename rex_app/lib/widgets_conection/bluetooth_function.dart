@@ -21,19 +21,17 @@ class BluetoothFunctions {
     }
   }
 
-  void scanDevices() {
-    // Implementar lógica para escanear dispositivos Bluetooth
+  void scanDevices(Function(List<ScanResult>) onScanCompleted) {
     flutterBlue.startScan(timeout: Duration(seconds: 4));
 
-// Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
-      // do something with scan results
+      List<ScanResult> foundDevices = [];
       for (ScanResult r in results) {
-        print('${r.device.name} found! rssi: ${r.rssi}');
+        foundDevices.add(r);
       }
+      onScanCompleted(foundDevices);
     });
 
-// Stop scanning
     flutterBlue.stopScan();
   }
 }

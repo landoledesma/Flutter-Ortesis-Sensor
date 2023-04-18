@@ -10,7 +10,10 @@ class ConectarDispositivoButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PantallaConexionBluetooth()),
+          MaterialPageRoute(
+              builder: (context) => PantallaConexionBluetooth(
+                    devices: [],
+                  )),
         );
       },
       child: Text('Conectar dispositivo'),

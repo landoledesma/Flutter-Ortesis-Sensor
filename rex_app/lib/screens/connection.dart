@@ -5,6 +5,10 @@ import '../widgets_conection/bluetooth_function.dart';
 import '../widgets_conection/body_conect.dart';
 
 class PantallaConexionBluetooth extends StatefulWidget {
+  final List<ScanResult> devices;
+
+  PantallaConexionBluetooth({required this.devices});
+
   @override
   _PantallaConexionBluetoothState createState() =>
       _PantallaConexionBluetoothState();
@@ -27,7 +31,7 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
           setState,
         ),
         scanDevices: bluetoothFunctions.scanDevices,
-        deviceList: bluetoothFunctions.deviceList,
+        deviceList: widget.devices, // Cambia esto para usar la lista recibida
       ),
     );
   }
