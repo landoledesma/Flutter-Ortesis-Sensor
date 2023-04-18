@@ -23,7 +23,7 @@ class _InicioPantallaState extends State<InicioPantalla> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/upiita.jpg'),
+                  Image.asset('assets/c-brace.jpg'),
                   SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
