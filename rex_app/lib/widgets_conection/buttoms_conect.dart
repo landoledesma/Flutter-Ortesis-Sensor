@@ -6,24 +6,27 @@ import '../screens/plot.dart';
 // Importa la clase BluetoothFunctions
 
 class ScanDevicesButton extends StatelessWidget {
-  final Function? onPressed;
+  //final Function? onPressed;
+  final bool isSwitched;
 
-  ScanDevicesButton({this.onPressed});
+  ScanDevicesButton({required this.isSwitched});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        BluetoothFunctions().scanDevices((foundDevices) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  PantallaConexionBluetooth(devices: foundDevices),
-            ),
-          );
-        });
-      },
+      onPressed: isSwitched
+          ? () {
+              BluetoothFunctions().scanDevices((foundDevices) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        PantallaConexionBluetooth(devices: foundDevices),
+                  ),
+                );
+              });
+            }
+          : null,
       child: Text('Escanear dispositivos', style: TextStyle(fontSize: 16)),
       style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 50)),
     );

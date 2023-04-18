@@ -39,7 +39,7 @@ class Body extends StatelessWidget {
           ),
           SizedBox(height: 24),
           ScanDevicesButton(
-            onPressed: isSwitched ? scanDevices : null,
+            isSwitched: isSwitched,
           ),
           SizedBox(height: 24),
           Text(
