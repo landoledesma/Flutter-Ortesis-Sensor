@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
+import '../widgets_conection/bluedvicemod.dart';
 import '../widgets_conection/bluetooth_function.dart';
 import '../widgets_conection/body_conect.dart';
+
+// Importa el modelo BluetoothDeviceModel
 
 class PantallaConexionBluetooth extends StatefulWidget {
   PantallaConexionBluetooth({Key? key}) : super(key: key);
@@ -15,10 +18,19 @@ class PantallaConexionBluetooth extends StatefulWidget {
 class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
   BluetoothFunctions bluetoothFunctions = BluetoothFunctions();
   List<ScanResult> devices = [];
+
+  // Variable para almacenar el dispositivo conectado y su estado de transmisión
+  BluetoothDeviceModel? connectedDeviceModel;
+
   Future<void> connectAndShowAlert(
       BuildContext context, BluetoothDevice device) async {
     bool isConnected = await bluetoothFunctions.connectToDevice(device);
     if (isConnected) {
+      // Almacena el dispositivo conectado en la instancia de BluetoothDeviceModel
+      // e incluye el contexto como argumento
+      connectedDeviceModel =
+          BluetoothDeviceModel(device: device, context: context);
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
