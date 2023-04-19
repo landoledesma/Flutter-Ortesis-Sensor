@@ -21,15 +21,13 @@ class BluetoothFunctions {
     }
   }
 
-  void scanDevices(Function(List<ScanResult>) onScanCompleted) {
+  void scanDevices(Function(ScanResult) onDeviceFound) {
     flutterBlue.startScan(timeout: Duration(seconds: 4));
 
     var subscription = flutterBlue.scanResults.listen((results) {
-      List<ScanResult> foundDevices = [];
       for (ScanResult r in results) {
-        foundDevices.add(r);
+        onDeviceFound(r);
       }
-      onScanCompleted(foundDevices);
     });
 
     flutterBlue.stopScan();
