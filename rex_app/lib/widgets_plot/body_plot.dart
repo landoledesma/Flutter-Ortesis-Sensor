@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rex_app/widgets_plot/buttons_plot.dart';
 
+import '../widgets/home_button.dart';
+
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
