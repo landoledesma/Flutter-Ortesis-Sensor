@@ -39,4 +39,14 @@ class BluetoothFunctions {
       subscription.cancel();
     });
   }
+
+  Future<bool> connectToDevice(BluetoothDevice device) async {
+    try {
+      await device.connect();
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }

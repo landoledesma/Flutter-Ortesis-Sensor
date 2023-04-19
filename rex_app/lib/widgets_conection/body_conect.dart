@@ -8,15 +8,16 @@ class Body extends StatelessWidget {
   final Function(bool) toggleBluetooth;
   final Function scanDevices;
   final List<ScanResult> deviceList;
-  final VoidCallback
-      startScanning; // Asegúrate de que la función tenga el tipo VoidCallback
+  final VoidCallback startScanning;
+  final Function(BuildContext, BluetoothDevice) connectAndShowAlert;
 
   Body({
     required this.isSwitched,
     required this.toggleBluetooth,
     required this.scanDevices,
     required this.deviceList,
-    required this.startScanning, // Agrega esto también
+    required this.startScanning,
+    required this.connectAndShowAlert, // Agrega esto también
   });
 
   @override
@@ -56,6 +57,8 @@ class Body extends StatelessWidget {
           ...deviceList.map((device) => ListTile(
                 title: Text(device.device.name),
                 subtitle: Text(device.device.id.toString()),
+                onTap: () => connectAndShowAlert(
+                    context, device.device), // Agrega el callback aquí
               )),
           SizedBox(height: 24),
           StartReadingDeviceButton(isSwitched: isSwitched),

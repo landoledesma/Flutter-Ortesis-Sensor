@@ -15,6 +15,36 @@ class PantallaConexionBluetooth extends StatefulWidget {
 class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
   BluetoothFunctions bluetoothFunctions = BluetoothFunctions();
   List<ScanResult> devices = [];
+  Future<void> connectAndShowAlert(
+      BuildContext context, BluetoothDevice device) async {
+    bool isConnected = await bluetoothFunctions.connectToDevice(device);
+    if (isConnected) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Conexión exitosa'),
+            content: Text(
+                'Te has conectado exitosamente al dispositivo ${device.name}.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No se pudo conectar al dispositivo ${device.name}.'),
+        ),
+      );
+    }
+  }
 
   void addDevice(ScanResult device) {
     setState(() {
@@ -42,7 +72,9 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
         scanDevices:
             startScanning, // Pasa startScanning en lugar de bluetoothFunctions.scanDevices
         deviceList: devices,
-        startScanning: startScanning, // Pasa la función startScanning
+        startScanning: startScanning,
+        connectAndShowAlert:
+            connectAndShowAlert, // Pasa la función startScanning
       ),
     );
   }
