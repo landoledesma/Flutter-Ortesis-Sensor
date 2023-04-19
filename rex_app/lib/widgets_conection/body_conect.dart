@@ -8,14 +8,16 @@ class Body extends StatelessWidget {
   final Function(bool) toggleBluetooth;
   final Function scanDevices;
   final List<ScanResult> deviceList;
+  final VoidCallback
+      startScanning; // Asegúrate de que la función tenga el tipo VoidCallback
 
   Body({
     required this.isSwitched,
     required this.toggleBluetooth,
     required this.scanDevices,
     required this.deviceList,
+    required this.startScanning, // Agrega esto también
   });
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -41,6 +43,7 @@ class Body extends StatelessWidget {
           SizedBox(height: 24),
           ScanDevicesButton(
             isSwitched: isSwitched,
+            onPressed: startScanning,
           ),
           SizedBox(height: 24),
           Text(

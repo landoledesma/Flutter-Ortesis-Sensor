@@ -10,10 +10,6 @@ class PantallaConexionBluetooth extends StatefulWidget {
   @override
   _PantallaConexionBluetoothState createState() =>
       _PantallaConexionBluetoothState();
-
-  static _PantallaConexionBluetoothState of(BuildContext context) {
-    return context.findAncestorStateOfType<_PantallaConexionBluetoothState>()!;
-  }
 }
 
 class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
@@ -47,6 +43,7 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
         ),
         scanDevices: bluetoothFunctions.scanDevices,
         deviceList: devices, // Utiliza la lista local de dispositivos
+        startScanning: startScanning, // Pasa la función startScanning
       ),
     );
   }
