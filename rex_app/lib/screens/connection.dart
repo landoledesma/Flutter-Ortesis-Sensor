@@ -16,15 +16,14 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
   BluetoothFunctions bluetoothFunctions = BluetoothFunctions();
   List<ScanResult> devices = [];
 
-  void addDevices(Set<ScanResult> foundDevices) {
+  void addDevice(ScanResult device) {
     setState(() {
-      devices.clear();
-      devices.addAll(foundDevices);
+      devices.add(device);
     });
   }
 
   void startScanning() {
-    bluetoothFunctions.scanDevices(addDevices);
+    bluetoothFunctions.scanDevices(addDevice);
   }
 
   @override
