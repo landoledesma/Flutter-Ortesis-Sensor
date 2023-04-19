@@ -12,18 +12,14 @@ class ScanDevicesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: isSwitched
-          ? () async {
-              // Navega a PantallaConexionBluetooth primero
-              await Navigator.push(
+          ? () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => PantallaConexionBluetooth(),
                 ),
-              );
-
-              // Comienza el escaneo después de que la pantalla de conexión se haya abierto
-              BluetoothFunctions().scanDevices((foundDevice) {
-                PantallaConexionBluetooth.of(context).addDevice(foundDevice);
+              ).then((_) {
+                PantallaConexionBluetooth.of(context).startScanning();
               });
             }
           : null,

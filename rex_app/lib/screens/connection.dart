@@ -26,6 +26,12 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
     });
   }
 
+  void startScanning() {
+    bluetoothFunctions.scanDevices((foundDevice) {
+      addDevice(foundDevice);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
