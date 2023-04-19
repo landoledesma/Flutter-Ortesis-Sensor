@@ -18,6 +18,7 @@ class Body extends StatelessWidget {
     required this.deviceList,
     required this.startScanning, // Agrega esto también
   });
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

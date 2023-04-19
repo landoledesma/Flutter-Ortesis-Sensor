@@ -16,16 +16,15 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
   BluetoothFunctions bluetoothFunctions = BluetoothFunctions();
   List<ScanResult> devices = [];
 
-  void addDevice(ScanResult device) {
+  void addDevices(Set<ScanResult> foundDevices) {
     setState(() {
-      devices.add(device);
+      devices.clear();
+      devices.addAll(foundDevices);
     });
   }
 
   void startScanning() {
-    bluetoothFunctions.scanDevices((foundDevice) {
-      addDevice(foundDevice);
-    });
+    bluetoothFunctions.scanDevices(addDevices);
   }
 
   @override
@@ -41,8 +40,9 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
           value,
           setState,
         ),
-        scanDevices: bluetoothFunctions.scanDevices,
-        deviceList: devices, // Utiliza la lista local de dispositivos
+        scanDevices:
+            startScanning, // Pasa startScanning en lugar de bluetoothFunctions.scanDevices
+        deviceList: devices,
         startScanning: startScanning, // Pasa la función startScanning
       ),
     );
