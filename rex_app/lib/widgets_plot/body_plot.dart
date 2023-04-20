@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rex_app/widgets_plot/buttons_plot.dart';
 
 import '../widgets/home_button.dart';
+import 'buttons_plot.dart';
 
 class Body extends StatelessWidget {
   @override
