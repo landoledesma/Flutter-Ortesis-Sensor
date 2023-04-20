@@ -3,6 +3,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:rex_app/widgets_conection/buttoms_conect.dart';
 import 'package:rex_app/widgets_conection/scanbuttom.dart';
 
+import 'bluedvicemod.dart';
+
 class Body extends StatelessWidget {
   final bool isSwitched;
   final Function(bool) toggleBluetooth;
@@ -10,15 +12,17 @@ class Body extends StatelessWidget {
   final List<ScanResult> deviceList;
   final VoidCallback startScanning;
   final Function(BuildContext, BluetoothDevice) connectAndShowAlert;
+  final BluetoothDeviceModel? connectedDeviceModel;
 
-  Body({
-    required this.isSwitched,
-    required this.toggleBluetooth,
-    required this.scanDevices,
-    required this.deviceList,
-    required this.startScanning,
-    required this.connectAndShowAlert, // Agrega esto también
-  });
+  Body(
+      {required this.isSwitched,
+      required this.toggleBluetooth,
+      required this.scanDevices,
+      required this.deviceList,
+      required this.startScanning,
+      required this.connectAndShowAlert,
+      required this.connectedDeviceModel // Agrega esto también
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +65,10 @@ class Body extends StatelessWidget {
                     context, device.device), // Agrega el callback aquí
               )),
           SizedBox(height: 24),
-          StartReadingDeviceButton(isSwitched: isSwitched),
+          StartReadingDeviceButton(
+            isSwitched: isSwitched,
+            connectedDeviceModel: connectedDeviceModel,
+          ),
         ],
       ),
     );

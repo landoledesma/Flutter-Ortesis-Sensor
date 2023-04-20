@@ -76,6 +76,7 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
       ),
       body: Body(
         isSwitched: bluetoothFunctions.isSwitched,
+        connectedDeviceModel: connectedDeviceModel,
         toggleBluetooth: (bool value) => bluetoothFunctions.toggleBluetooth(
           context,
           value,
