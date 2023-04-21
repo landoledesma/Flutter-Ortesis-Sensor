@@ -28,8 +28,6 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
     if (isConnected) {
       // Almacena el dispositivo conectado en la instancia de BluetoothDeviceModel
       // e incluye el contexto como argumento
-      connectedDeviceModel =
-          BluetoothDeviceModel(device: device, context: context);
 
       showDialog(
         context: context,
@@ -49,6 +47,8 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
           );
         },
       );
+      connectedDeviceModel =
+          BluetoothDeviceModel(device: device, context: context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

@@ -10,5 +10,5 @@ class BluetoothDeviceModel {
   BluetoothDeviceModel(
       {required this.device,
       required this.context,
-      this.isTransmitting = true});
+      this.isTransmitting = false});
 }
