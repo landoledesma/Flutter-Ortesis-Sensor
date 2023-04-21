@@ -7,6 +7,24 @@ import '../widgets_conection/bluedvicemod.dart';
 class RecordingButtons extends StatelessWidget {
   final BluetoothDeviceModel deviceModel;
 
+  double processData(List<int> data) {
+    // Convierte los bytes en una cadena
+    String dataString = String.fromCharCodes(data);
+
+    // Extrae el valor numérico de la cadena
+    RegExp regex = RegExp(r'El número aleatorio generado es: (\d+)\.');
+    Match? match = regex.firstMatch(dataString);
+
+    if (match == null) {
+      throw Exception('No se pudo encontrar el valor numérico en la cadena');
+    }
+
+    // Convierte la parte numérica de la cadena en un valor double
+    double doubleValue = double.parse(match.group(1)!);
+
+    return doubleValue;
+  }
+
   void _startRecording() async {
     deviceModel.isTransmitting = true;
 
