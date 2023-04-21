@@ -14,7 +14,7 @@ class StartReadingDeviceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isSwitched && connectedDeviceModel == null
+      onPressed: isSwitched && connectedDeviceModel != null
           ? () {
               print(connectedDeviceModel);
               print(isSwitched);

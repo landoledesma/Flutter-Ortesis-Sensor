@@ -47,8 +47,10 @@ class _PantallaConexionBluetoothState extends State<PantallaConexionBluetooth> {
           );
         },
       );
-      connectedDeviceModel =
-          BluetoothDeviceModel(device: device, context: context);
+      setState(() {
+        connectedDeviceModel =
+            BluetoothDeviceModel(device: device, context: context);
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

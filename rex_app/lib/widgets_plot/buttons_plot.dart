@@ -41,21 +41,28 @@ class RecordingButtons extends StatelessWidget {
         await deviceModel.device.discoverServices();
 
     // Obtener servicio por UUID
-    var service = services.firstWhere((s) => s.uuid == Guid("serviceUuid"));
+    var service = services.firstWhere(
+        (s) => s.uuid == Guid("12345678-1234-5678-1234-56789ABCDEF0"));
 
     // Obtener característica por UUID
-    var characteristic = service.characteristics
-        .firstWhere((c) => c.uuid == Guid("characteristicUuid"));
+    var characteristic = service.characteristics.firstWhere(
+        (c) => c.uuid == Guid("12345678-1234-5678-1234-56789ABCDEF2"));
 
     // Ejemplo de cómo escribir en una característica específica
     List<int> startCommand = [
       0x01
     ]; // Comando para iniciar la transmisión, adaptar según tu dispositivo
     await characteristic.write(startCommand);
+    var characteristicChar = service.characteristics.firstWhere((c) =>
+        c.uuid ==
+        Guid(
+            "12345678-1234-5678-1234-56789ABCDEF1")); // Asegúrate de que este UUID coincida con _CHAR_UUID en el servidor MicroPython
 
+// Habilitar notificaciones para la característica _CHAR_UUID
+    await characteristicChar.setNotifyValue(true);
     // Ejemplo de cómo escuchar las notificaciones de una característica específica
-    await characteristic.setNotifyValue(true);
-    characteristic.value.listen((data) {
+
+    characteristicChar.value.listen((data) {
       if (deviceModel.isTransmitting) {
         // Aquí se reciben los datos del dispositivo BLE
         // Convierte los datos en un valor numérico (ejemplo: double)
