@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rex_app/screens/connection.dart';
 
 import '../screens/plot.dart';
+
 import 'bluedvicemod.dart';
 
 class StartReadingDeviceButton extends StatelessWidget {
@@ -19,7 +20,8 @@ class StartReadingDeviceButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PantallaDatosTiempoReal()),
+                    builder: (context) => PantallaDatosTiempoReal(
+                        deviceModel: connectedDeviceModel!)),
               );
             }
           : null,
