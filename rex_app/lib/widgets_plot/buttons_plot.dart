@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../screens/home.dart';
@@ -6,6 +8,12 @@ import '../widgets_conection/bluedvicemod.dart';
 
 class RecordingButtons extends StatelessWidget {
   final BluetoothDeviceModel deviceModel;
+  final StreamController<double>? streamController;
+
+  RecordingButtons({
+    required this.deviceModel,
+    this.streamController,
+  });
 
   double processData(List<int> data) {
     // Convierte los bytes en una cadena
@@ -54,7 +62,7 @@ class RecordingButtons extends StatelessWidget {
         double value = processData(data); // Implementa la función processData
 
         // Añade el valor al StreamController
-        _streamController.add(value);
+        streamController?.add(value);
       }
     });
   }
@@ -83,7 +91,6 @@ class RecordingButtons extends StatelessWidget {
     await characteristic.setNotifyValue(false);
   }
 
-  RecordingButtons({required this.deviceModel});
   @override
   Widget build(BuildContext context) {
     return Row(

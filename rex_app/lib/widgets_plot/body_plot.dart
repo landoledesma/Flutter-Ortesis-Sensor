@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'dart:async';
 import '../widgets/home_button.dart';
+import '../widgets_conection/bluedvicemod.dart';
 import 'buttons_plot.dart';
 
 class Body extends StatelessWidget {
+  late final BluetoothDeviceModel deviceModel;
+  late final StreamController<double> _streamController =
+      StreamController<double>();
+  StreamSubscription<double>? _streamSubscription;
+
+  Body({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -22,7 +30,9 @@ class Body extends StatelessWidget {
               Expanded(child: Container()),
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                child: RecordingButtons(),
+                child: RecordingButtons(
+                  deviceModel: deviceModel,
+                ),
               ),
               SizedBox(height: 10),
             ],
