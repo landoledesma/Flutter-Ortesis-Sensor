@@ -88,16 +88,23 @@ class RecordingButtons extends StatelessWidget {
         await deviceModel.device.discoverServices();
 
     // Obtener servicio por UUID
-    var service = services.firstWhere((s) => s.uuid == Guid("serviceUuid"));
+    var service = services.firstWhere(
+        (s) => s.uuid == Guid("12345678-1234-5678-1234-56789ABCDEF0"));
 
     // Obtener característica por UUID
-    var characteristic = service.characteristics
-        .firstWhere((c) => c.uuid == Guid("characteristicUuid"));
+    var characteristic = service.characteristics.firstWhere(
+        (c) => c.uuid == Guid("12345678-1234-5678-1234-56789ABCDEF2"));
+
+    var characteristicChar = service.characteristics.firstWhere((c) =>
+        c.uuid ==
+        Guid(
+            "12345678-1234-5678-1234-56789ABCDEF1")); // Asegúrate de que este UUID coincida con _CHAR_UUID en el servidor MicroPython
+    // Reads all characteristics
 
     // Ejemplo de cómo escribir en una característica específica
     List<int> stopCommand = [
       0x00
-    ]; // Comando para detener la transmisión, adaptar según tu dispositivo
+    ]; // Comando para iniciar la transmisión, adaptar según tu dispositivo
     await characteristic.write(stopCommand);
 
     // Detiene la escucha de notificaciones para la característica
