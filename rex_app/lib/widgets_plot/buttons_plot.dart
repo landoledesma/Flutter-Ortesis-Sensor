@@ -16,19 +16,13 @@ class RecordingButtons extends StatelessWidget {
   });
 
   double processData(List<int> data) {
-    // Convierte los bytes en una cadena
-    String dataString = String.fromCharCodes(data);
-
-    // Extrae el valor numérico de la cadena
-    RegExp regex = RegExp(r'El número aleatorio generado es: (\d+)\.');
-    Match? match = regex.firstMatch(dataString);
-
-    if (match == null) {
-      throw Exception('No se pudo encontrar el valor numérico en la cadena');
+    // Comprueba si data tiene al menos un elemento
+    if (data.isEmpty) {
+      throw Exception('La lista de datos está vacía');
     }
 
-    // Convierte la parte numérica de la cadena en un valor double
-    double doubleValue = double.parse(match.group(1)!);
+    // Convierte el primer elemento de la lista en un valor double
+    double doubleValue = data[0].toDouble();
 
     return doubleValue;
   }
@@ -48,28 +42,40 @@ class RecordingButtons extends StatelessWidget {
     var characteristic = service.characteristics.firstWhere(
         (c) => c.uuid == Guid("12345678-1234-5678-1234-56789ABCDEF2"));
 
+    var characteristicChar = service.characteristics.firstWhere((c) =>
+        c.uuid ==
+        Guid(
+            "12345678-1234-5678-1234-56789ABCDEF1")); // Asegúrate de que este UUID coincida con _CHAR_UUID en el servidor MicroPython
+    // Reads all characteristics
+
     // Ejemplo de cómo escribir en una característica específica
     List<int> startCommand = [
       0x01
     ]; // Comando para iniciar la transmisión, adaptar según tu dispositivo
     await characteristic.write(startCommand);
-    var characteristicChar = service.characteristics.firstWhere((c) =>
-        c.uuid ==
-        Guid(
-            "12345678-1234-5678-1234-56789ABCDEF1")); // Asegúrate de que este UUID coincida con _CHAR_UUID en el servidor MicroPython
 
 // Habilitar notificaciones para la característica _CHAR_UUID
     await characteristicChar.setNotifyValue(true);
     // Ejemplo de cómo escuchar las notificaciones de una característica específica
-
-    characteristicChar.value.listen((data) {
+    //await characteristicChar.read();
+    characteristicChar.value.listen((value) {
       if (deviceModel.isTransmitting) {
-        // Aquí se reciben los datos del dispositivo BLE
-        // Convierte los datos en un valor numérico (ejemplo: double)
-        double value = processData(data); // Implementa la función processData
+        print('estoy recibiendo el valor');
+        print(value);
 
-        // Añade el valor al StreamController
-        streamController?.add(value);
+        if (value.isNotEmpty) {
+          // Agrega esta condición para asegurarte de que el valor no esté vacío
+          // Aquí se reciben los datos del dispositivo BLE
+          // Convierte los datos en un valor numérico (ejemplo: double)
+          double valor =
+              processData(value); // Implementa la función processData
+
+          // Añade el valor al StreamController
+          streamController?.add(valor);
+        } else {
+          // Ignora el valor vacío y continúa
+          print(value);
+        }
       }
     });
   }
@@ -105,11 +111,11 @@ class RecordingButtons extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: _startRecording,
-          child: Text('Iniciar grabación'),
+          child: Text('Iniciar'),
         ),
         ElevatedButton(
           onPressed: _stopRecording,
-          child: Text('Detener grabación'),
+          child: Text('Detener'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -121,7 +127,7 @@ class RecordingButtons extends StatelessWidget {
               ),
             );
           },
-          child: Text('Cargar datos históricos'),
+          child: Text('Cargar datos'),
         ),
       ],
     );

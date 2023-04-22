@@ -51,7 +51,8 @@ class _BodyState extends State<Body> {
                 height: 200,
                 child: Center(child: Text('Gráfica de datos en tiempo real')),
               ),
-              Text('Valor del sensor: --'),
+              Text(
+                  'Valor del sensor: ${chartData.isNotEmpty ? chartData.last.toStringAsFixed(2) : "--"}'),
               SizedBox(height: 10),
               SfCartesianChart(
                 primaryXAxis: CategoryAxis(),
@@ -68,7 +69,9 @@ class _BodyState extends State<Body> {
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: RecordingButtons(
-                  deviceModel: widget.deviceModel, // Utiliza widget.deviceModel
+                  deviceModel: widget.deviceModel,
+                  streamController:
+                      _streamController, // Utiliza widget.deviceModel
                 ),
               ),
               SizedBox(height: 10),
