@@ -83,10 +83,6 @@ class _BodyState extends State<Body> {
             ],
           ),
         ),
-        Positioned(
-            right: 10,
-            top: MediaQuery.of(context).size.height * 0.75,
-            child: HomeButton()),
       ],
     );
   }

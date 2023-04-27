@@ -116,15 +116,16 @@ class RecordingButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ElevatedButton(
+        FloatingActionButton(
+          child: Icon(Icons.play_arrow),
           onPressed: _startRecording,
-          child: Text('Iniciar'),
         ),
-        ElevatedButton(
+        FloatingActionButton(
+          child: Icon(Icons.pause),
           onPressed: _stopRecording,
-          child: Text('Detener'),
         ),
-        ElevatedButton(
+        FloatingActionButton(
+          child: Icon(Icons.file_copy),
           onPressed: () {
             // Navegar a pantalla de carga y visualización de datos históricos
             Navigator.push(
@@ -134,7 +135,6 @@ class RecordingButtons extends StatelessWidget {
               ),
             );
           },
-          child: Text('Cargar datos'),
         ),
       ],
     );
