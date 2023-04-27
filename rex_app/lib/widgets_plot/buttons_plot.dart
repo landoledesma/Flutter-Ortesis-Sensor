@@ -60,9 +60,6 @@ class RecordingButtons extends StatelessWidget {
     //await characteristicChar.read();
     characteristicChar.value.listen((value) {
       if (deviceModel.isTransmitting) {
-        print('estoy recibiendo el valor');
-        print(value);
-
         if (value.isNotEmpty) {
           // Agrega esta condición para asegurarte de que el valor no esté vacío
           // Aquí se reciben los datos del dispositivo BLE
@@ -72,9 +69,6 @@ class RecordingButtons extends StatelessWidget {
 
           // Añade el valor al StreamController
           streamController?.add(valor);
-        } else {
-          // Ignora el valor vacío y continúa
-          print(value);
         }
       }
     });
@@ -121,10 +115,12 @@ class RecordingButtons extends StatelessWidget {
           onPressed: _startRecording,
         ),
         FloatingActionButton(
+          heroTag: 'start',
           child: Icon(Icons.pause),
           onPressed: _stopRecording,
         ),
         FloatingActionButton(
+          heroTag: 'save',
           child: Icon(Icons.file_copy),
           onPressed: () {
             // Navegar a pantalla de carga y visualización de datos históricos

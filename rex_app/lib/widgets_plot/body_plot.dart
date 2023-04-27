@@ -17,15 +17,15 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   List<double> chartData = [];
   final int maxDataSize = 60000;
-  late final StreamController<double> _streamController =
+  late final StreamController<double> streamController =
       StreamController<double>();
 
-  StreamSubscription<double>? _streamSubscription;
+  StreamSubscription<double>? streamSubscription;
 
   @override
   void initState() {
     super.initState();
-    _streamSubscription = _streamController.stream.listen((double value) {
+    streamSubscription = streamController.stream.listen((double value) {
       setState(() {
         if (chartData.length >= maxDataSize) {
           chartData.removeAt(
@@ -38,8 +38,8 @@ class _BodyState extends State<Body> {
 
   @override
   void dispose() {
-    _streamSubscription?.cancel(); // Cancela la suscripción
-    _streamController.close(); // Cierra el StreamController
+    streamSubscription?.cancel(); // Cancela la suscripción
+    streamController.close(); // Cierra el StreamController
     super.dispose();
   }
 
@@ -76,7 +76,7 @@ class _BodyState extends State<Body> {
                 child: RecordingButtons(
                   deviceModel: widget.deviceModel,
                   streamController:
-                      _streamController, // Utiliza widget.deviceModel
+                      streamController, // Utiliza widget.deviceModel
                 ),
               ),
               SizedBox(height: 10),
