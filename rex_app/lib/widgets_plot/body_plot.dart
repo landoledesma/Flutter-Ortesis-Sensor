@@ -16,6 +16,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   List<double> chartData = [];
+  final int maxDataSize = 60000;
   late final StreamController<double> _streamController =
       StreamController<double>();
 
@@ -26,6 +27,10 @@ class _BodyState extends State<Body> {
     super.initState();
     _streamSubscription = _streamController.stream.listen((double value) {
       setState(() {
+        if (chartData.length >= maxDataSize) {
+          chartData.removeAt(
+              0); // Elimina el dato más antiguo si se alcanza el tamaño máximo
+        }
         chartData.add(value); // Actualiza la lista de datos con el nuevo valor
       });
     });
