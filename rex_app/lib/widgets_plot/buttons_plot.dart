@@ -29,8 +29,7 @@ class RecordingButtons extends StatefulWidget {
 class _RecordingButtonsState extends State<RecordingButtons> {
   late String tempFileName;
   double valor = 0.0;
-  late final StreamController<double> streamController =
-      StreamController<double>();
+  late final StreamController<double> stream = StreamController<double>();
 
   StreamSubscription<double>? streamSubscription;
 
@@ -51,7 +50,7 @@ class _RecordingButtonsState extends State<RecordingButtons> {
     super.initState();
     tempFileName = 'temp_${UniqueKey().toString()}.csv';
     clearTempFile(tempFileName);
-    streamSubscription = streamController.stream.listen((double value) {
+    streamSubscription = stream.stream.listen((double value) {
       setState(() async {
         valor = value;
         await appendDataToTempFile(value, tempFileName);
@@ -68,7 +67,8 @@ class _RecordingButtonsState extends State<RecordingButtons> {
         FloatingActionButton(
           heroTag: 'start',
           child: Icon(Icons.play_arrow),
-          onPressed: () => startRecording(widget.deviceModel, streamController),
+          onPressed: () =>
+              startRecording(widget.deviceModel, widget.streamController),
         ),
         FloatingActionButton(
           heroTag: 'stop',

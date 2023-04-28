@@ -16,7 +16,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   List<double> chartData = [];
-  double valor = 0.0;
+  //double valor = 0.0;
   final int maxDataSize = 60000;
   late final StreamController<double> streamController =
       StreamController<double>();
