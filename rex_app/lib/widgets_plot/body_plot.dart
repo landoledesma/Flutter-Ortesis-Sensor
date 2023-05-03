@@ -16,7 +16,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   List<double> chartData = [];
-  //double valor = 0.0;
+
   final int maxDataSize = 60000;
   late final StreamController<double> streamController =
       StreamController<double>();
@@ -72,7 +72,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
               SizedBox(height: 10),
-              /*Expanded(child: Container()),
+              Expanded(child: Container()),
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: RecordingButtons(
@@ -81,7 +81,7 @@ class _BodyState extends State<Body> {
                       streamController, // Utiliza widget.deviceModel
                 ),
               ),
-              SizedBox(height: 10),*/
+              SizedBox(height: 10),
             ],
           ),
         ),
