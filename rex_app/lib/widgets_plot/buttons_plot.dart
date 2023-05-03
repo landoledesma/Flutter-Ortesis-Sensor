@@ -6,6 +6,7 @@ import 'package:rex_app/widgets_plot/showdialog.dart';
 import '../screens/visualize.dart';
 import '../widgets_conection/bluedvicemod.dart';
 import 'notifier.dart';
+import 'package:restart_app/restart_app.dart';
 
 class RecordingButtons extends StatefulWidget {
   final BluetoothDeviceModel deviceModel;
@@ -67,6 +68,13 @@ class _RecordingButtonsState extends State<RecordingButtons> {
               onPressed: () async {
                 await showSaveDialog(context, tempFileName);
               }),
+          FloatingActionButton(
+            heroTag: 'restart',
+            child: const Icon(Icons.restart_alt),
+            onPressed: () {
+              Restart.restartApp();
+            },
+          ),
         ],
       );
     });
