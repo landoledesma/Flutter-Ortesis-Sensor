@@ -10,7 +10,7 @@ import 'notifier.dart';
 class Body extends StatefulWidget {
   final BluetoothDeviceModel deviceModel;
 
-  Body({required this.deviceModel, Key? key}) : super(key: key);
+  const Body({required this.deviceModel, Key? key}) : super(key: key);
   @override
   State<Body> createState() => _BodyState();
 }
@@ -18,7 +18,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   List<double> chartData = [];
   final int maxDataSize = 60000;
-  @override
+  /*@override
   void initState() {
     super.initState();
   }
@@ -27,19 +27,17 @@ class _BodyState extends State<Body> {
   void dispose() {
     super.dispose();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Consumer<BluetoothValueNotifier>(
         builder: (context, bluetoothValueNotifier, child) {
       double valor = bluetoothValueNotifier.bluetoothValue;
 
-      setState(() {
-        if (chartData.length >= maxDataSize) {
-          chartData.removeAt(0);
-        }
-        chartData.add(valor);
-      });
+      if (chartData.length >= maxDataSize) {
+        chartData.removeAt(0);
+      }
+      chartData.add(valor);
 
       return Stack(
         children: [
@@ -65,10 +63,10 @@ class _BodyState extends State<Body> {
                     )
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Expanded(child: Container()),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: RecordingButtons(
                     deviceModel: widget.deviceModel,
                     bluetoothValueNotifier:
@@ -76,7 +74,7 @@ class _BodyState extends State<Body> {
                     // Utiliza widget.deviceModel
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),

@@ -38,7 +38,6 @@ class _RecordingButtonsState extends State<RecordingButtons> {
   Widget build(BuildContext context) {
     return Consumer<BluetoothValueNotifier>(
         builder: (context, bluetoothValueNotifier, child) {
-      //double valor = bluetoothValueNotifier.bluetoothValue;
       String tempFileName = bluetoothValueNotifier.tempFileName;
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

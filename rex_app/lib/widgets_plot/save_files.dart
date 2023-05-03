@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+//import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:rex_app/screens/plot.dart';
-import '../screens/home.dart';
-import '../screens/visualize.dart';
+//import 'package:rex_app/screens/plot.dart';
+//import '../screens/home.dart';
+//import '../screens/visualize.dart';
 import '../widgets_conection/bluedvicemod.dart';
 
 late final BluetoothDeviceModel deviceModel;
@@ -61,7 +61,7 @@ Future<void> saveFinalCsvFile(
 
 void showSuccessSnackBar(context) {
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
+    const SnackBar(
       content: Text('Archivo guardado con éxito!'),
       duration: Duration(seconds: 2),
     ),
