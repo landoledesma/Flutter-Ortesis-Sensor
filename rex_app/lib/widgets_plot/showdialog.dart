@@ -8,23 +8,26 @@ Future<void> showSaveDialog(BuildContext context, String tempFileName) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text('Guardar archivo CSV'),
+        title: const Text('Guardar archivo CSV'),
         content: TextField(
           controller: textFieldController,
-          decoration: InputDecoration(hintText: 'Nombre del archivo'),
+          decoration: const InputDecoration(hintText: 'Nombre del archivo'),
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('Aceptar'),
-            onPressed: () {
-              saveFinalCsvFile(textFieldController.text, tempFileName, context);
+            child: const Text('Aceptar'),
+            onPressed: () async {
+              await saveFinalCsvFile(
+                  textFieldController.text, tempFileName, context);
               Navigator.of(context).pop();
+
+              showSuccessSnackBar(context);
             },
           ),
         ],

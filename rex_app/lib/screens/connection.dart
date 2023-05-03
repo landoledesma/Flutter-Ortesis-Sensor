@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-
 import '../widgets_conection/bluedvicemod.dart';
 import '../widgets_conection/bluetooth_function.dart';
 import '../widgets_conection/body_conect.dart';
-
-// Importa el modelo BluetoothDeviceModel
 
 class PantallaConexionBluetooth extends StatefulWidget {
   PantallaConexionBluetooth({Key? key}) : super(key: key);

@@ -1,15 +1,11 @@
-//import 'dart:async';
-//import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:rex_app/widgets_plot/notifier.dart';
 import 'package:rex_app/widgets_plot/save_files.dart';
-//import '../screens/home.dart';
-//import '../screens/visualize.dart';
 import '../widgets_conection/bluedvicemod.dart';
 
 double processData(List<int> data) {
-  // Comprueba si data tiene al menos un elemento
   if (data.isEmpty) {
+    // Comprueba si data tiene al menos un elemento
     throw Exception('La lista de datos está vacía');
   }
   // Convierte el primer elemento de la lista en un valor double
@@ -32,7 +28,6 @@ startRecording(BluetoothDeviceModel deviceModel,
       c.uuid ==
       Guid(
           "12345678-1234-5678-1234-56789ABCDEF1")); // Asegúrate de que este UUID coincida con _CHAR_UUID en el servidor MicroPython
-  // Ejemplo de cómo escribir en una característica específica
   List<int> startCommand = [
     0x01
   ]; // Comando para iniciar la transmisión, adaptar según tu dispositivo
@@ -41,13 +36,12 @@ startRecording(BluetoothDeviceModel deviceModel,
   await characteristicChar.setNotifyValue(true);
   // Ejemplo de cómo escuchar las notificaciones de una característica específica
   characteristicChar.value.listen((value) {
+    // Aquí se reciben los datos del dispositivo BLE
     if (deviceModel.isTransmitting) {
       if (value.isNotEmpty) {
         // Agrega esta condición para asegurarte de que el valor no esté vacío
-        // Aquí se reciben los datos del dispositivo BLE
         // Convierte los datos en un valor numérico (ejemplo: double)
         double valor = processData(value); // Implementa la función processData
-        // Añade el valor al StreamController
         bluetoothValueNotifier.updateBluetoothValue(valor);
         appendDataToTempFile(valor, bluetoothValueNotifier.tempFileName);
       }
@@ -71,11 +65,9 @@ void stopRecording(
       c.uuid ==
       Guid(
           "12345678-1234-5678-1234-56789ABCDEF1")); // Asegúrate de que este UUID coincida con _CHAR_UUID en el servidor MicroPython
-  // Ejemplo de cómo escribir en una característica específica
   List<int> stopCommand = [
     0x00
-  ]; // Comando para iniciar la transmisión, adaptar según tu dispositivo
+  ]; // Comando para detener la transmisión, adaptar según tu dispositivo
   await characteristic.write(stopCommand);
-  // Detiene la escucha de notificaciones para la característica
   await characteristic.setNotifyValue(false);
 }

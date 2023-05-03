@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../screens/home.dart';
 
 class HomeButton extends StatelessWidget {
+  const HomeButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -15,7 +16,7 @@ class HomeButton extends StatelessWidget {
           (Route<dynamic> route) => false,
         );
       },
-      child: Icon(Icons.home),
+      child: const Icon(Icons.home),
       tooltip: 'Ir al inicio',
     );
   }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 
 class SeleccionarArchivoScreen extends StatelessWidget {
+  const SeleccionarArchivoScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Seleccionar archivo CSV')),
+      appBar: AppBar(title: const Text('Seleccionar archivo CSV')),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
@@ -17,7 +19,7 @@ class SeleccionarArchivoScreen extends StatelessWidget {
               Navigator.pop(context, result.files.single.path);
             }
           },
-          child: Text('Seleccionar archivo'),
+          child: const Text('Seleccionar archivo'),
         ),
       ),
     );

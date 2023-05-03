@@ -1,5 +1,3 @@
-// main.dart
-//import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rex_app/widgets_plot/notifier.dart';

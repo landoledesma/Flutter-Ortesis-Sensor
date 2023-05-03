@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-
 import 'package:csv/csv.dart';
 import 'package:rex_app/screens/select_files.dart';
-
 import '../widgets_visualize/chart_file.dart';
 
 class PantallaDatosHistoricos extends StatefulWidget {
@@ -40,23 +38,23 @@ class _PantallaDatosHistoricosState extends State<PantallaDatosHistoricos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Visualizar datos históricos')),
+      appBar: AppBar(title: const Text('Visualizar datos históricos')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           ElevatedButton(
             onPressed: _cargarArchivoCSV,
-            child: Text('Cargar archivo CSV'),
+            child: const Text('Cargar archivo CSV'),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: Container(
               decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
               child: _datos != null
                   ? SensorChart(datos: _datos!)
-                  : Center(
+                  : const Center(
                       child: Text('Gráfica de datos históricos del sensor'),
                     ),
             ),

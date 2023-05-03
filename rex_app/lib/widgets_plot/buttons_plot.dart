@@ -1,15 +1,8 @@
-//import 'dart:async';
-//import 'dart:io';
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
-//import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-//import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:rex_app/widgets_plot/save_files.dart';
 import 'package:rex_app/widgets_plot/send_data.dart';
 import 'package:rex_app/widgets_plot/showdialog.dart';
-//import '../screens/home.dart';
-//import '../screens/plot.dart';
 import '../screens/visualize.dart';
 import '../widgets_conection/bluedvicemod.dart';
 import 'notifier.dart';

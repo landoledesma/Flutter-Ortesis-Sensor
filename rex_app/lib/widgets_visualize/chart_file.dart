@@ -10,8 +10,7 @@ class SensorData {
 
 class SensorChart extends StatelessWidget {
   final List<List<dynamic>> datos;
-
-  SensorChart({required this.datos});
+  const SensorChart({super.key, required this.datos});
 
   List<SensorData> _procesarDatos() {
     List<SensorData> data = [];
@@ -27,7 +26,6 @@ class SensorChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<SensorData> datosProcesados = _procesarDatos();
-
     return SfCartesianChart(
       primaryXAxis: NumericAxis(),
       primaryYAxis: NumericAxis(),
